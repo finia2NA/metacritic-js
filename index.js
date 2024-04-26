@@ -1,10 +1,10 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-async function getGameScore(name) {
+async function getScore(name) {
   const encodedName = name.replace(' ', '-');
   try {
-    const response = await axios.get(`https://www.metacritic.com/search/${encodedName}?page=1&category=13`);
+    const response = await axios.get(`https://www.metacritic.com/search/${encodedName}`);
     const $ = cheerio.load(response.data);
     const firstDiv = $('.c-siteReviewScore').first().text();
     console.log(firstDiv);
@@ -13,4 +13,7 @@ async function getGameScore(name) {
   }
 }
 
-// getGameScore('Persona 5');
+// Example usage
+// getScore('Cyberpunk 2077');
+
+module.exports = getScore;
